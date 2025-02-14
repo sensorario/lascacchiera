@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conoscere la scacchiera</title>
+</head>
+<body>
+    <h1>Conoscere la scacchiera</h1>
+    <div class="chess-container">
+        <div class="chess"></div>
+        <div class="random-position"></div>
+        <div class="selected-position"></div>
+        <div class="results"></div>
+    </div>
+    <script>
+        const state = {
+            selectedPosition: null,
+            randomPosition: null,
+            results: []
+        };
+
+        const chessContainer = document.querySelector('.chess');
+        const columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        const rows = [8, 7, 6, 5, 4, 3, 2, 1];
+        
+        const check = () => {
+            if (state.selectedPosition == state.randomPosition) {
+                state.results.push('😊');
+                generateRandomPosition();
+            } else {
+                state.results.push('😢');
+            }
+            
+            document.querySelector('.results').innerHTML = state.results.join(' - ');
+        };
+
+        const clickHandler = (event) => {
+            const selectedPosition = event.target.dataset.position;
+            state.selectedPosition = selectedPosition;
+            document.querySelector('.selected-position').innerHTML = event.target.dataset.position;
+
+            check();
+        };
+
+        const generateRandomPosition = () => {
+            const randomColumn = columns[Math.floor(Math.random() * columns.length)];
+            const randomRow = rows[Math.floor(Math.random() * rows.length)];
+            const randomPosition = `${randomColumn}${randomRow}`;
+            state.randomPosition = randomPosition;
+            document.querySelector('.random-position').innerHTML = randomPosition;
+        };
+
+        generateRandomPosition();
+
+        const createChessboard = () => {
+            for (let row of rows) {
+                for (let col of columns) {
+                    const square = document.createElement('div');
+
+                    square.classList.add('square');
+                    square.classList.add((columns.indexOf(col) + row) % 2 === 0 ? 'white' : 'black');
+                    square.dataset.position = `${col}${row}`;
+                    square.addEventListener('click', clickHandler);
+
+                    chessContainer.appendChild(square);
+                }
+            }
+        };
+
+        createChessboard();
+    </script>
+    <style>
+        .chess {
+            display: grid;
+            grid-template-columns: repeat(8, 50px);
+            grid-template-rows: repeat(8, 50px);
+            border: 1px solid black;
+            width: 400px;
+        }
+        .square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+        .white {
+            background-color: white;
+        }
+        .black {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</body>
+</html>
