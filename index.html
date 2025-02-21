@@ -48,13 +48,15 @@
       };
 
       const clickHandler = (event) => {
-        const selectedPosition = event.target.dataset.position;
-
+        let selectedPosition = event.target.dataset.position;
+        if (!selectedPosition) {
+          selectedPosition =
+            event.target.parentNode.getAttribute("data-position");
+        }
         state.selectedPosition = selectedPosition;
-
         document.querySelector(".selected-position").innerHTML =
-          event.target.dataset.position;
-        console.log(selectedPosition);
+          selectedPosition;
+
         check();
       };
 
