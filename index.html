@@ -24,6 +24,17 @@
       const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
       const rows = [8, 7, 6, 5, 4, 3, 2, 1];
 
+      const generateRandomPosition = () => {
+        const randomColumn =
+          columns[Math.floor(Math.random() * columns.length)];
+        const randomRow = rows[Math.floor(Math.random() * rows.length)];
+        const randomPosition = `${randomColumn}${randomRow}`;
+        state.randomPosition = randomPosition;
+        document.querySelector(".random-position").innerHTML = randomPosition;
+      };
+
+      generateRandomPosition();
+
       const check = () => {
         if (state.selectedPosition == state.randomPosition) {
           state.results.push("😊");
@@ -37,24 +48,17 @@
       };
 
       const clickHandler = (event) => {
-        const selectedPosition = event.target.dataset.position;
+        let selectedPosition = event.target.dataset.position;
+        if (!selectedPosition) {
+          selectedPosition =
+            event.target.parentNode.getAttribute("data-position");
+        }
         state.selectedPosition = selectedPosition;
         document.querySelector(".selected-position").innerHTML =
-          event.target.dataset.position;
+          selectedPosition;
 
         check();
       };
-
-      const generateRandomPosition = () => {
-        const randomColumn =
-          columns[Math.floor(Math.random() * columns.length)];
-        const randomRow = rows[Math.floor(Math.random() * rows.length)];
-        const randomPosition = `${randomColumn}${randomRow}`;
-        state.randomPosition = randomPosition;
-        document.querySelector(".random-position").innerHTML = randomPosition;
-      };
-
-      generateRandomPosition();
 
       const createChessboard = () => {
         for (let row of rows) {
@@ -98,7 +102,7 @@
 
             const piece = document.createElement("span");
             const initialPosition = initialPositions.find(
-              (p) => p.position === `${col}${row}`,
+              (p) => p.position === `${col}${row}`
             );
             if (initialPosition) {
               piece.innerHTML = initialPosition.piece;
