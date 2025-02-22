@@ -111,7 +111,7 @@
             square.appendChild(piece);
             square.classList.add("square");
             square.classList.add(
-              (columns.indexOf(col) + row) % 2 === 0 ? "white" : "black"
+              (columns.indexOf(col) + row) % 2 === 0 ? "white" : "black",
             );
             square.dataset.position = `${col}${row}`;
             square.addEventListener("click", clickHandler);
