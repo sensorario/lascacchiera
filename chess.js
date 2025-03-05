@@ -85,6 +85,8 @@ const state = {
         ];
 
         const piece = document.createElement("span");
+        piece.classList.add("piece");
+
         const initialPosition = initialPositions.find(
           (p) => p.position === `${col}${row}`
         );
@@ -92,7 +94,24 @@ const state = {
           piece.innerHTML = initialPosition.piece;
         }
 
+        
         square.appendChild(piece);
+
+        if (row === 1 ) {
+          const letter = document.createElement("span");
+          letter.classList.add("letter");
+          letter.innerHTML = col;
+          square.appendChild(letter);
+        }
+
+        if (col === "a") {
+          const number = document.createElement("span");
+          number.classList.add("number");
+          number.innerHTML = row;
+          square.appendChild(number);
+        }
+        
+
         square.classList.add("square");
         square.classList.add(
           (columns.indexOf(col) + row) % 2 === 0 ? "white" : "black",
