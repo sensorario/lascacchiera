@@ -1,19 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conoscere la scacchiera</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="module" src="src/chess.js"></script>
   </head>
   <body>
     <h1>Conoscere la scacchiera</h1>
     <div class="chess-container">
+      <div class="label">
+        Cerca la posizione di una casella:
+        <span class="random-position"></span>
+      </div>
       <div class="chess"></div>
-      <div class="random-position"></div>
-      <div class="selected-position"></div>
+      <div class="label">
+        Ultimo click:
+        <span class="selected-position"></span>
+      </div>
       <div class="results"></div>
     </div>
-    <script type="text/javascript" src="chess.js"></script>
   </body>
-</html>
