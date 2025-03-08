@@ -30,7 +30,7 @@ const check = () => {
   }
 
   document.querySelector(".results").innerHTML =
-    state.results.join(" - ");
+    state.results.join("");
 };
 
 const clickHandler = (event) => {

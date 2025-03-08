@@ -1,21 +1,46 @@
+:root {
+    --font-family: Tahoma;
+    --font-size: 16px;
+    --font-color: #000;
+    --square-size: 40px;
+    --board-size: calc(var(--square-size) * 8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+}
+
+h1 {
+    background-color: beige;
+    border-radius: 8px;
+    margin: 16px;
+    padding: 16px;
+    font-size: var(--font-size);
+    text-align: center;
+}
+
 .chess {
-    display: grid;
-    grid-template-columns: repeat(8, 50px);
-    grid-template-rows: repeat(8, 50px);
-    border: 1px solid black;
-    width: 400px;
-    margin: 32px;
-  }
+    display: none;
+}
 
 .square {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    font-size: xxx-large;
+    width: var(--square-size);
+    height: var(--square-size); 
+    font-size: calc(var(--font-size) * 2);
     position: relative;
-
+    transition: all 1s;
+    cursor: pointer;
+    font-weight: 900;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+    
     .piece {
         z-index: 10;
         color: green;
@@ -26,9 +51,9 @@
         position: absolute;
         bottom: 2px;
         right: 2px;
-        font-size: 16px;
-        font-family: SYSTEM-UI;
+        font-size: calc(var(--font-size) * 1);
         color: brown;
+        text-shadow: none;
     }
     
     .number {
@@ -36,17 +61,91 @@
         position: absolute;
         top: 2px;
         left: 2px;
-        font-size: 16px;
-        font-family: SYSTEM-UI;
+        font-size: calc(var(--font-size) * 1);
         color: brown;
+        text-shadow: none;
     }
 }
 
 .white {
     background-color: white;
+    
+    .letter, .number {
+        color: black;
+    }
 }
 
 .black {
     background-color: black;
-    color: white;
+    
+    .letter, .number {
+        color: white;
+    }
+}
+
+.results, .label {
+    text-align: center;
+    background-color: beige;
+    border-radius: 8px;
+    margin: 16px;
+    padding: 16px;
+    display: none;
+}
+
+.random-position {
+    color: red;
+    font-weight: 600;
+}
+
+.anti-chess {
+    padding: 16px;
+    color: red  ;
+}
+
+.chess-container {
+    .label {
+        display: none;
+    }
+}
+
+@media (min-width: 375px) {
+    .chess {
+        display: grid;
+        grid-template-columns: repeat(8, var(--square-size));
+        grid-template-rows: repeat(8, var(--square-size));
+        border: 1px solid black;
+        width: var(--board-size);
+        margin: auto;
+        transition: all 1s;
+    }
+
+    .anti-chess {
+        display: none  ;
+    }
+
+    .chess-container {
+        .label {
+            display: block;
+        }
+    }
+
+    .results, .label {
+        display: block;
+    }
+}
+
+@media (min-width: 600px) {
+    :root {
+        --square-size: 60px;
+        --font-size: 24px;
+        --board-size: calc(var(--square-size) * 8);
+    }
+}
+
+@media (min-width: 900px) {
+    :root {
+        --square-size: 80px;
+        --font-size: 32px;
+        --board-size: calc(var(--square-size) * 8);
+    }
 }
