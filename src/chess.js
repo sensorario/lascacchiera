@@ -1,4 +1,4 @@
-import square from "@moduli/square";
+import square from "@moduli/square.js";
 
 const state = {
   selectedPosition: null,
