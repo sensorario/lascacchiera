@@ -1,37 +1,26 @@
-export const fen = () => {
+import { dictionary } from "./dictionary";
+
+export const fenParser = () => {
     const b = [];
-
-    const t = piece => {
-        const blackPawn = '♙';
-        const whitePawn = '♟';
-        const whiteRook = '♜';
-
-        const pieces = {
-            P: whitePawn,
-            p: blackPawn,        
-            R: whiteRook,    
-        };
-
-        return pieces[piece];
-    };
 
     const board = (fenString) => {
         let colNumber = 8;
         let rowLetter = 97;
+
         for (let i = 0; i < fenString.length; i++) {
-            const char = fenString[i];
-            if (char === '/') {
+            const piece = fenString[i];
+            if (piece === '/') {
                 colNumber--;
                 rowLetter = 97;
-                continue;
             } else {
-                const content = parseInt(char);
+                const content = parseInt(piece);
                 if (isNaN(content)) {
                     b.push({
                         position: String.fromCharCode(rowLetter) + colNumber,
-                        piece: char,
-                        text: t(char)
+                        piece,
+                        text: dictionary()[piece]
                      });
+                     rowLetter++;
                 } else {
                     let emptySquares = content;
                     rowLetter += emptySquares;
@@ -46,3 +35,4 @@ export const fen = () => {
         board
     };
 };
+
