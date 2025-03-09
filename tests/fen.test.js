@@ -1,4 +1,4 @@
-import { fenParser } from "../src/fen";
+import fenParser from "../src/fen.js";
 
 describe("fenBuilder", () => {
     it("generate empty array whenever board is empty", () => {
@@ -6,7 +6,7 @@ describe("fenBuilder", () => {
         const board = f.board('8/8/8/8/8/8/8/8');
         expect(board).toStrictEqual([]);
     });
-            
+
     it("generate array with pieces placed in right position", () => {
         const inputs = [];
 
@@ -15,18 +15,18 @@ describe("fenBuilder", () => {
             lascacchieraBoard: [
                 { position: 'e4', piece: 'P', text: '♟' }
             ]
-        },{
+        }, {
             fenBoard: '8/8/8/8/3P4/8/8/8',
             lascacchieraBoard: [
                 { position: 'd4', piece: 'P', text: '♟' }
             ]
-        },{
+        }, {
             fenBoard: '8/8/1r6/8/3P4/8/8/8',
             lascacchieraBoard: [
                 { position: 'b6', piece: 'r', text: '♖' },
                 { position: 'd4', piece: 'P', text: '♟' }
             ]
-        },{
+        }, {
             fenBoard: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
             lascacchieraBoard: [
                 { position: 'a8', piece: 'r', text: '♖' },

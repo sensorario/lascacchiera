@@ -1,4 +1,4 @@
-export const dictionary = () => {
+const dictionary = () => {
     const blackPawn = '♙';
     const blackRook = '♖';
     const blackKnight = '♘';
@@ -30,3 +30,5 @@ export const dictionary = () => {
     };
     return pieces;
 };
+
+export default dictionary;

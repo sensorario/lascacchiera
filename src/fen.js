@@ -1,6 +1,6 @@
-import { dictionary } from "../dictionary";
+import dictionary from "@moduli/dictionary.js";
 
-export const fenParser = () => {
+const fenParser = () => {
     const b = [];
 
     const board = (fenString) => {
@@ -19,14 +19,14 @@ export const fenParser = () => {
                         position: String.fromCharCode(rowLetter) + colNumber,
                         piece,
                         text: dictionary()[piece]
-                     });
-                     rowLetter++;
+                    });
+                    rowLetter++;
                 } else {
                     let emptySquares = content;
                     rowLetter += emptySquares;
                 }
             }
-        }  
+        }
 
         return b;
     };
@@ -36,3 +36,4 @@ export const fenParser = () => {
     };
 };
 
+export default fenParser;
