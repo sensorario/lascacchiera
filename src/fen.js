@@ -1,4 +1,4 @@
-import { dictionary } from "./dictionary";
+import { dictionary } from "../dictionary";
 
 export const fenParser = () => {
     const b = [];

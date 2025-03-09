@@ -1,4 +1,4 @@
-import { fenParser } from "./fen";
+import { fenParser } from "../src/fen";
 
 describe("fenBuilder", () => {
     it("generate empty array whenever board is empty", () => {
