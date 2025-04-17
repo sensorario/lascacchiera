@@ -1,10 +1,12 @@
 import square from "@moduli/square.js";
 import fenParser from "@moduli/fen.js";
+import positions from "./positions.js"
 
 const state = {
   selectedPosition: null,
   randomPosition: null,
   results: [],
+  fen: positions[0].fen,
 };
 
 const chessContainer = document.querySelector(".chess");
@@ -56,7 +58,7 @@ const createChessboard = () => {
       piece.classList.add("piece");
 
       const initialPosition = fenParser()
-        .board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
+        .board(state.fen)
         .find(
           (p) => p.position === `${col}${row}`
         );
@@ -95,3 +97,26 @@ const createChessboard = () => {
 };
 
 createChessboard();
+
+const createOpeningsDropdown = () => {
+  const openingsContainer = document.querySelector(".openings");
+  const select = document.createElement("select");
+
+  positions.forEach((position, index) => {
+    const option = document.createElement("option");
+    option.value = position.fen;
+    option.textContent = position.name;
+    select.appendChild(option);
+  });
+
+  select.addEventListener("change", (event) => {
+    const selectedFen = event.target.value;
+    state.fen = selectedFen;
+    chessContainer.innerHTML = "";
+    createChessboard();
+  });
+
+  openingsContainer.appendChild(select);
+};
+
+createOpeningsDropdown();
