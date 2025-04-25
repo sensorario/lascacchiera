@@ -9,6 +9,15 @@ const state = {
   fen: positions[0].fen,
 };
 
+const createElement = (tag, classList, innerHTML) => {
+  const element = document.createElement(tag);
+  classList.forEach(cls => {
+    element.classList.add(cls);
+  });
+  element.innerHTML = innerHTML;
+  return element
+}
+
 const chessContainer = document.querySelector(".chess");
 const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const rows = [8, 7, 6, 5, 4, 3, 2, 1];
@@ -67,23 +76,17 @@ const createChessboard = () => {
         piece.innerHTML = initialPosition.text;
       }
 
-
-      casella.appendChild(piece);
-
       if (row === 1) {
-        const letter = document.createElement("span");
-        letter.classList.add("letter");
-        letter.innerHTML = col;
-        casella.appendChild(letter);
+        casella.appendChild(
+          createElement("span", ["letter"], col)
+        );
       }
 
       if (col === "a") {
-        const number = document.createElement("span");
-        number.classList.add("number");
-        number.innerHTML = row;
-        casella.appendChild(number);
+        casella.appendChild(
+          createElement("span", ["number"], row)
+        );
       }
-
 
       casella.classList.add(
         (columns.indexOf(col) + row) % 2 === 0 ? "white" : "black",
