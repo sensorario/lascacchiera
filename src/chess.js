@@ -1,6 +1,6 @@
 import square from "@moduli/square.js";
 import fenParser from "@moduli/fen.js";
-import positions from "./positions.js"
+import positions from "./positions.js";
 
 const state = {
   selectedPosition: null,
@@ -11,20 +11,19 @@ const state = {
 
 const createElement = (tag, classList, innerHTML) => {
   const element = document.createElement(tag);
-  classList.forEach(cls => {
+  classList.forEach((cls) => {
     element.classList.add(cls);
   });
   element.innerHTML = innerHTML;
-  return element
-}
+  return element;
+};
 
 const chessContainer = document.querySelector(".chess");
 const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const rows = [8, 7, 6, 5, 4, 3, 2, 1];
 
 const generateRandomPosition = () => {
-  const randomColumn =
-    columns[Math.floor(Math.random() * columns.length)];
+  const randomColumn = columns[Math.floor(Math.random() * columns.length)];
   const randomRow = rows[Math.floor(Math.random() * rows.length)];
   const randomPosition = `${randomColumn}${randomRow}`;
   state.randomPosition = randomPosition;
@@ -41,19 +40,16 @@ const check = () => {
     state.results.push("😢");
   }
 
-  document.querySelector(".results").innerHTML =
-    state.results.join("");
+  document.querySelector(".results").innerHTML = state.results.join("");
 };
 
 const clickHandler = (event) => {
   let selectedPosition = event.target.dataset.position;
   if (!selectedPosition) {
-    selectedPosition =
-      event.target.parentNode.getAttribute("data-position");
+    selectedPosition = event.target.parentNode.getAttribute("data-position");
   }
   state.selectedPosition = selectedPosition;
-  document.querySelector(".selected-position").innerHTML =
-    selectedPosition;
+  document.querySelector(".selected-position").innerHTML = selectedPosition;
 
   check();
 };
@@ -61,31 +57,25 @@ const clickHandler = (event) => {
 const createChessboard = () => {
   for (let row of rows) {
     for (let col of columns) {
-      const casella = square()
+      const casella = square();
 
       const piece = document.createElement("span");
       piece.classList.add("piece");
 
-      const initialPosition = fenParser()
+      const pieceFound = fenParser()
         .board(state.fen)
-        .find(
-          (p) => p.position === `${col}${row}`
-        );
+        .find((p) => p.position === `${col}${row}`);
 
-      if (initialPosition) {
-        piece.innerHTML = initialPosition.text;
+      if (pieceFound) {
+        piece.innerHTML = pieceFound.text;
       }
 
       if (row === 1) {
-        casella.appendChild(
-          createElement("span", ["letter"], col)
-        );
+        casella.appendChild(createElement("span", ["letter"], col));
       }
 
       if (col === "a") {
-        casella.appendChild(
-          createElement("span", ["number"], row)
-        );
+        casella.appendChild(createElement("span", ["number"], row));
       }
 
       casella.classList.add(
@@ -93,13 +83,14 @@ const createChessboard = () => {
       );
       casella.dataset.position = `${col}${row}`;
       casella.addEventListener("click", clickHandler);
+      casella.appendChild(piece);
 
       chessContainer.appendChild(casella);
     }
   }
 };
 
-createChessboard();
+// createChessboard();
 
 const createOpeningsDropdown = () => {
   const openingsContainer = document.querySelector(".openings");
@@ -115,6 +106,7 @@ const createOpeningsDropdown = () => {
   select.addEventListener("change", (event) => {
     const selectedFen = event.target.value;
     state.fen = selectedFen;
+    console.log(state.fen);
     chessContainer.innerHTML = "";
     createChessboard();
   });
