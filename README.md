@@ -21,10 +21,10 @@ npm install
 
 ## Usage
 
-E' incluso un server node, quindi per usare la scacchiera basta lanciare il comando ...
+E' incluso un server node, quindi per usare la scacchiera basta lanciare il comando ... L'opzione `-c1` serve per impostare la durata della cache ad 1 secondo perché in fase di sviluppo altrimenti diventa rognoso fare le modifiche.
 
 ```bash
-http-server
+http-server -c1
 ```
 
 ## Screenshot
