@@ -128,7 +128,7 @@ const createChessboardSVG = () => {
       square.setAttribute("height", squareSize);
       square.setAttribute(
         "fill",
-        (columns.indexOf(col) + row) % 2 === 0 ? "#f5deb3" : "#8b4513",
+        (columns.indexOf(col) + row) % 2 === 0 ? "#8b4513" : "#f5deb3",
       );
       square.dataset.position = `${col}${row}`;
       square.addEventListener("click", clickHandler);
@@ -161,7 +161,7 @@ const createChessboardSVG = () => {
         pieceBorder.setAttribute("dominant-baseline", "middle");
         pieceBorder.setAttribute("text-anchor", "middle");
         pieceBorder.setAttribute("font-size", squareSize);
-        piece.setAttribute("stroke", isUppercase ? "white" : "black");
+        piece.setAttribute("stroke", isUppercase ? "black" : "white");
         pieceBorder.setAttribute("stroke-width", "3");
         pieceBorder.setAttribute("fill", "none");
         pieceBorder.textContent = pieceFound.text;
