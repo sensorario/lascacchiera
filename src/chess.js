@@ -109,7 +109,7 @@ const createOpeningsDropdown = () => {
 const createChessboardSVG = () => {
   const svgNamespace = "http://www.w3.org/2000/svg";
   const chessboardSize = 8; // Assuming an 8x8 chessboard
-  const squareSize = 60; // Size of each square in pixels
+  const squareSize = 80; // Size of each square in pixels
   const svg = document.createElementNS(svgNamespace, "svg");
 
   svg.setAttribute("width", squareSize * chessboardSize);

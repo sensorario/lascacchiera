@@ -2,7 +2,7 @@
     --font-family: Tahoma;
     --font-size: 32px;
     --font-color: #000;
-    --square-size: 60px;
+    --square-size: 80px;
     --board-size: calc(var(--square-size) * 8);
 }
 
@@ -26,6 +26,14 @@ h1 {
 
 .chess {
     display: none;
+}
+
+.action,
+.openings {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .square {
