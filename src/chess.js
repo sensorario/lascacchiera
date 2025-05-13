@@ -54,44 +54,6 @@ const clickHandler = (event) => {
   check();
 };
 
-const createChessboard = () => {
-  for (let row of rows) {
-    for (let col of columns) {
-      const casella = square();
-
-      const piece = document.createElement("span");
-      piece.classList.add("piece");
-
-      const pieceFound = fenParser()
-        .board(state.fen)
-        .find((p) => p.position === `${col}${row}`);
-
-      if (pieceFound) {
-        piece.innerHTML = pieceFound.text;
-      }
-
-      if (row === 1) {
-        casella.appendChild(createElement("span", ["letter"], col));
-      }
-
-      if (col === "a") {
-        casella.appendChild(createElement("span", ["number"], row));
-      }
-
-      casella.classList.add(
-        (columns.indexOf(col) + row) % 2 === 0 ? "white" : "black",
-      );
-      casella.dataset.position = `${col}${row}`;
-      casella.addEventListener("click", clickHandler);
-      casella.appendChild(piece);
-
-      chessContainer.appendChild(casella);
-    }
-  }
-};
-
-// createChessboard();
-
 const createOpeningsDropdown = () => {
   const openingsContainer = document.querySelector(".openings");
   const select = document.createElement("select");
@@ -108,10 +70,134 @@ const createOpeningsDropdown = () => {
     state.fen = selectedFen;
     console.log(state.fen);
     chessContainer.innerHTML = "";
-    createChessboard();
+    createChessboardSVG();
+
+    document.querySelector("#image-button").addEventListener("click", () => {
+      const svg = document.querySelector(".chess svg");
+      if (svg) {
+        const svgData = new XMLSerializer().serializeToString(svg);
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        const img = new Image();
+
+        const svgBlob = new Blob([svgData], {
+          type: "image/svg+xml;charset=utf-8",
+        });
+        const url = URL.createObjectURL(svgBlob);
+
+        img.onload = () => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          context.drawImage(img, 0, 0);
+          URL.revokeObjectURL(url);
+
+          const imgURL = canvas.toDataURL("image/png");
+          const link = document.createElement("a");
+          link.href = imgURL;
+          link.download = "chessboard.png";
+          link.click();
+        };
+
+        img.src = url;
+      }
+    });
   });
 
   openingsContainer.appendChild(select);
 };
 
+const createChessboardSVG = () => {
+  const svgNamespace = "http://www.w3.org/2000/svg";
+  const chessboardSize = 8; // Assuming an 8x8 chessboard
+  const squareSize = 60; // Size of each square in pixels
+  const svg = document.createElementNS(svgNamespace, "svg");
+
+  svg.setAttribute("width", squareSize * chessboardSize);
+  svg.setAttribute("height", squareSize * chessboardSize);
+
+  for (let row of rows) {
+    for (let col of columns) {
+      const x = columns.indexOf(col) * squareSize;
+      const y = (row - 1) * squareSize;
+
+      // Create the square
+      const square = document.createElementNS(svgNamespace, "rect");
+      square.setAttribute("x", x);
+      square.setAttribute("y", y);
+      square.setAttribute("width", squareSize);
+      square.setAttribute("height", squareSize);
+      square.setAttribute(
+        "fill",
+        (columns.indexOf(col) + row) % 2 === 0 ? "#f5deb3" : "#8b4513",
+      );
+      square.dataset.position = `${col}${row}`;
+      square.addEventListener("click", clickHandler);
+
+      svg.appendChild(square);
+
+      // Add the piece if present
+      const pieceFound = fenParser()
+        .board(state.fen)
+        .find((p) => p.position === `${col}${row}`);
+
+      console.log(pieceFound);
+
+      if (pieceFound) {
+        const isUppercase = pieceFound.piece == pieceFound.piece.toUpperCase();
+
+        const piece = document.createElementNS(svgNamespace, "text");
+        piece.setAttribute("x", x + squareSize / 2);
+        piece.setAttribute("y", y + squareSize / 2);
+        piece.setAttribute("dominant-baseline", "middle");
+        piece.setAttribute("text-anchor", "middle");
+        piece.setAttribute("font-size", squareSize);
+        piece.setAttribute("fill", isUppercase ? "black" : "white");
+        piece.textContent = pieceFound.text;
+
+        // Add a border effect by duplicating the text with a stroke
+        const pieceBorder = document.createElementNS(svgNamespace, "text");
+        pieceBorder.setAttribute("x", x + squareSize / 2);
+        pieceBorder.setAttribute("y", y + squareSize / 2);
+        pieceBorder.setAttribute("dominant-baseline", "middle");
+        pieceBorder.setAttribute("text-anchor", "middle");
+        pieceBorder.setAttribute("font-size", squareSize);
+        piece.setAttribute("stroke", isUppercase ? "white" : "black");
+        pieceBorder.setAttribute("stroke-width", "3");
+        pieceBorder.setAttribute("fill", "none");
+        pieceBorder.textContent = pieceFound.text;
+
+        svg.appendChild(pieceBorder);
+        svg.appendChild(piece);
+      }
+
+      // Add column letters and row numbers
+      if (row === 1) {
+        const letter = document.createElementNS(svgNamespace, "text");
+        letter.setAttribute("x", x + squareSize / 2);
+        letter.setAttribute("y", chessboardSize * squareSize + 15);
+        letter.setAttribute("text-anchor", "middle");
+        letter.setAttribute("font-size", 12);
+        letter.textContent = col;
+
+        svg.appendChild(letter);
+      }
+
+      if (col === "a") {
+        const number = document.createElementNS(svgNamespace, "text");
+        number.setAttribute("x", -15);
+        number.setAttribute("y", y + squareSize / 2);
+        number.setAttribute("dominant-baseline", "middle");
+        number.setAttribute("text-anchor", "end");
+        number.setAttribute("font-size", 12);
+        number.textContent = row;
+
+        svg.appendChild(number);
+      }
+    }
+  }
+
+  chessContainer.appendChild(svg);
+};
+
 createOpeningsDropdown();
+createChessboardSVG();

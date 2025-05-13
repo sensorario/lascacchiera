@@ -1,8 +1,8 @@
 :root {
     --font-family: Tahoma;
-    --font-size: 16px;
+    --font-size: 32px;
     --font-color: #000;
-    --square-size: 40px;
+    --square-size: 60px;
     --board-size: calc(var(--square-size) * 8);
 }
 
@@ -33,19 +33,19 @@ h1 {
     align-items: center;
     justify-content: center;
     width: var(--square-size);
-    height: var(--square-size); 
+    height: var(--square-size);
     font-size: calc(var(--font-size) * 2);
     position: relative;
     transition: all 1s;
     cursor: pointer;
     font-weight: 900;
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
-    
+
     .piece {
         z-index: 10;
         color: green;
     }
-    
+
     .letter {
         z-index: 5;
         position: absolute;
@@ -55,7 +55,7 @@ h1 {
         color: brown;
         text-shadow: none;
     }
-    
+
     .number {
         z-index: 5;
         position: absolute;
@@ -69,21 +69,24 @@ h1 {
 
 .white {
     background-color: white;
-    
-    .letter, .number {
+
+    .letter,
+    .number {
         color: black;
     }
 }
 
 .black {
     background-color: black;
-    
-    .letter, .number {
+
+    .letter,
+    .number {
         color: white;
     }
 }
 
-.results, .label {
+.results,
+.label {
     text-align: center;
     background-color: beige;
     border-radius: 8px;
@@ -99,7 +102,7 @@ h1 {
 
 .anti-chess {
     padding: 16px;
-    color: red  ;
+    color: red;
 }
 
 .chess-container {
@@ -111,8 +114,8 @@ h1 {
 @media (min-width: 375px) {
     .chess {
         display: grid;
-        grid-template-columns: repeat(8, var(--square-size));
-        grid-template-rows: repeat(8, var(--square-size));
+        /* grid-template-columns: repeat(8, var(--square-size));
+        grid-template-rows: repeat(8, var(--square-size)); */
         border: 1px solid black;
         width: var(--board-size);
         margin: auto;
@@ -120,7 +123,7 @@ h1 {
     }
 
     .anti-chess {
-        display: none  ;
+        display: none;
     }
 
     .chess-container {
@@ -129,23 +132,24 @@ h1 {
         }
     }
 
-    .results, .label {
+    .results,
+    .label {
         display: block;
     }
 }
 
 @media (min-width: 600px) {
     :root {
-        --square-size: 60px;
+        /* --square-size: 60px; */
         --font-size: 24px;
-        --board-size: calc(var(--square-size) * 8);
+        /* --board-size: calc(var(--square-size) * 8); */
     }
 }
 
 @media (min-width: 900px) {
     :root {
-        --square-size: 80px;
+        /* --square-size: 80px; */
         --font-size: 32px;
-        --board-size: calc(var(--square-size) * 8);
+        /* --board-size: calc(var(--square-size) * 8); */
     }
 }
