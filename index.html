@@ -15,7 +15,45 @@
         <script type="module" src="src/chess.js"></script>
     </head>
     <body>
-        <h1>lascacchiera</h1>
+        <h1>lascacchiera 2.0</h1>
         <div id="new-chess"></div>
+        <button id="generate-png">Generate PNG</button>
+        <script>
+            document
+                .getElementById("generate-png")
+                .addEventListener("click", () => {
+                    const svg = document.querySelector("#new-chess svg");
+                    if (svg) {
+                        const svgData = new XMLSerializer().serializeToString(
+                            svg,
+                        );
+                        const canvas = document.createElement("canvas");
+                        const context = canvas.getContext("2d");
+                        const img = new Image();
+
+                        const scaleFactor = 2; // Increase resolution by 2x
+                        canvas.width = svg.getAttribute("width") * scaleFactor;
+                        canvas.height =
+                            svg.getAttribute("height") * scaleFactor;
+                        context.scale(scaleFactor, scaleFactor);
+
+                        img.onload = () => {
+                            context.drawImage(img, 0, 0);
+                            const pngData = canvas.toDataURL("image/png");
+
+                            const link = document.createElement("a");
+                            link.href = pngData;
+                            link.download = "chessboard.png";
+                            link.click();
+                        };
+
+                        img.src =
+                            "data:image/svg+xml;charset=utf-8," +
+                            encodeURIComponent(svgData);
+                    } else {
+                        console.error("SVG not found!");
+                    }
+                });
+        </script>
     </body>
 </html>

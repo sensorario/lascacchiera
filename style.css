@@ -24,9 +24,7 @@ h1 {
     text-align: center;
 }
 
-.chess {
-    display: none;
-}
+
 
 .action,
 .openings {
@@ -36,62 +34,9 @@ h1 {
     margin-right: 20px;
 }
 
-.square {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--square-size);
-    height: var(--square-size);
-    font-size: calc(var(--font-size) * 2);
-    position: relative;
-    transition: all 1s;
-    cursor: pointer;
-    font-weight: 900;
-    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
 
-    .piece {
-        z-index: 10;
-        color: green;
-    }
 
-    .letter {
-        z-index: 5;
-        position: absolute;
-        bottom: 2px;
-        right: 2px;
-        font-size: calc(var(--font-size) * 1);
-        color: brown;
-        text-shadow: none;
-    }
 
-    .number {
-        z-index: 5;
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        font-size: calc(var(--font-size) * 1);
-        color: brown;
-        text-shadow: none;
-    }
-}
-
-.white {
-    background-color: white;
-
-    .letter,
-    .number {
-        color: black;
-    }
-}
-
-.black {
-    background-color: black;
-
-    .letter,
-    .number {
-        color: white;
-    }
-}
 
 .results,
 .label {
@@ -113,33 +58,9 @@ h1 {
     color: red;
 }
 
-.chess-container {
-    .label {
-        display: none;
-    }
-}
+
 
 @media (min-width: 375px) {
-    .chess {
-        display: grid;
-        /* grid-template-columns: repeat(8, var(--square-size));
-        grid-template-rows: repeat(8, var(--square-size)); */
-        border: 1px solid black;
-        width: var(--board-size);
-        margin: auto;
-        transition: all 1s;
-    }
-
-    .anti-chess {
-        display: none;
-    }
-
-    .chess-container {
-        .label {
-            display: block;
-        }
-    }
-
     .results,
     .label {
         display: block;
@@ -148,16 +69,12 @@ h1 {
 
 @media (min-width: 600px) {
     :root {
-        /* --square-size: 60px; */
         --font-size: 24px;
-        /* --board-size: calc(var(--square-size) * 8); */
     }
 }
 
 @media (min-width: 900px) {
     :root {
-        /* --square-size: 80px; */
         --font-size: 32px;
-        /* --board-size: calc(var(--square-size) * 8); */
     }
 }

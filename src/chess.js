@@ -5,23 +5,23 @@ const state = {
   selectedPosition: null,
   randomPosition: null,
   results: [],
-  fen: positions[0].fen,
+  fen: positions[1].fen,
 };
 
 const funzione = () => {
   const svgNamespace = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNamespace, "svg");
-  svg.setAttribute("width", "320");
-  svg.setAttribute("height", "320");
+  svg.setAttribute("width", "640");
+  svg.setAttribute("height", "640");
 
   for (let row = 0; row < 8; row++) {
     for (let col = 0; col < 8; col++) {
       const rect = document.createElementNS(svgNamespace, "rect");
-      rect.setAttribute("x", col * 40);
-      rect.setAttribute("y", row * 40);
-      rect.setAttribute("width", "40");
-      rect.setAttribute("height", "40");
-      rect.setAttribute("fill", (col + row) % 2 === 0 ? "black" : "white");
+      rect.setAttribute("x", col * 80);
+      rect.setAttribute("y", row * 80);
+      rect.setAttribute("width", "80");
+      rect.setAttribute("height", "80");
+      rect.setAttribute("fill", (col + row) % 2 === 0 ? "#d2b48c" : "#f5deb3");
 
       const position = `${String.fromCharCode(97 + col)}${8 - row}`;
       rect.setAttribute("data-position", position);
@@ -38,4 +38,36 @@ const funzione = () => {
   }
 };
 
+const placePiecesFromFEN = (fen) => {
+  const pieces = fenParser().board(fen);
+  pieces.forEach((piece) => {
+    const square = document.querySelector(
+      `[data-position='${piece.position}']`,
+    );
+    if (square) {
+      const svgNamespace = "http://www.w3.org/2000/svg";
+      const text = document.createElementNS(svgNamespace, "text");
+      const x = parseInt(square.getAttribute("x")) + 40;
+      const y = parseInt(square.getAttribute("y")) + 40;
+
+      text.setAttribute("x", x);
+      text.setAttribute("y", y);
+      text.setAttribute("dominant-baseline", "middle");
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("font-size", "64");
+      const isUppercase = piece.piece === piece.piece.toUpperCase();
+      text.setAttribute("fill", isUppercase ? "#ffffff" : "#000000");
+      text.setAttribute("stroke", isUppercase ? "#000000" : "#ffffff");
+      text.setAttribute("stroke-width", "1");
+      text.textContent = piece.text;
+
+      console.log({ piece });
+
+      square.parentNode.appendChild(text);
+      console.log(square);
+    }
+  });
+};
+
 funzione();
+placePiecesFromFEN(state.fen);
