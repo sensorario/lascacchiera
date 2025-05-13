@@ -29,7 +29,7 @@ http-server
 
 ## Screenshot
 
-![Screenshot](image.png)
+![Screenshot](chessboard.png)
 
 ## Contributing
 
