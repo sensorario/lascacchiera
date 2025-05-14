@@ -53,6 +53,10 @@ button {
 
 #new-chess {
     text-align: center;
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 1 / 1;
+    margin: auto;
 }
 
 #position-buttons {
@@ -84,8 +88,10 @@ h1 {
 }
 
 .container {
-    width: 900px;
+    width: 100%;
+    max-width: 900px;
     margin: auto;
+    padding: calc(var(--space-unit) * 2);
 }
 
 .results,
