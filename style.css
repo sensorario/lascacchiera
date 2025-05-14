@@ -1,9 +1,7 @@
 :root {
     --font-family: Tahoma;
     --font-size: 32px;
-    --font-color: #000;
-    --square-size: 80px;
-    --board-size: calc(var(--square-size) * 8);
+    --space-unit: 4px;
 }
 
 * {
@@ -15,56 +13,88 @@ body {
     font-family: var(--font-family);
 }
 
-h1 {
-    background-color: beige;
-    border-radius: 8px;
-    margin: 16px;
-    padding: 16px;
-    font-size: var(--font-size);
+button {
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+    border: 1px solid #ccc;
+    border-radius: calc(var(--space-unit) * 2);
+    padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 3);
+    font-family: var(--font-family);
+    font-size: calc(var(--font-size) * 0.5);
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 calc(var(--space-unit) * 0.5) calc(var(--space-unit) * 1)
+        rgba(0, 0, 0, 0.1);
+    transition:
+        background-color 0.3s,
+        box-shadow 0.3s;
+}
+
+.layout {
+    display: flex;
+    gap: var(--space-unit);
+}
+
+.main {
+    flex: 0 0 70%;
+}
+
+.side {
+    flex: 0 0 30%;
+}
+
+.action-button {
+    display: flex;
+    gap: calc(var(--space-unit) * 2);
+    margin: calc(var(--space-unit) * 2);
+    button {
+        flex: 1;
+    }
+}
+
+#new-chess {
     text-align: center;
 }
 
-
-
-.action,
-.openings {
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+#position-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--space-unit) * 2);
+    margin: calc(var(--space-unit) * 2);
+    justify-content: space-between;
 }
 
+#position-buttons button {
+    flex: 1;
+}
 
+#position-buttons button:hover {
+    background: linear-gradient(135deg, #e0e0e0, #d6d6d6);
+    box-shadow: 0 calc(var(--space-unit) * 1) calc(var(--space-unit) * 2)
+        rgba(0, 0, 0, 0.2);
+}
 
+h1 {
+    background-color: #0077b5; /* LinkedIn blue */
+    border-radius: calc(var(--space-unit) * 2);
+    margin: calc(var(--space-unit) * 4);
+    padding: calc(var(--space-unit) * 4);
+    font-size: var(--font-size);
+    text-align: center;
+    color: white;
+}
 
+.container {
+    width: 900px;
+    margin: auto;
+}
 
 .results,
 .label {
     text-align: center;
     background-color: beige;
-    border-radius: 8px;
-    margin: 16px;
-    padding: 16px;
-    display: none;
-}
-
-.random-position {
-    color: red;
-    font-weight: 600;
-}
-
-.anti-chess {
-    padding: 16px;
-    color: red;
-}
-
-
-
-@media (min-width: 375px) {
-    .results,
-    .label {
-        display: block;
-    }
+    border-radius: calc(var(--space-unit) * 2);
+    margin: calc(var(--space-unit) * 4);
+    padding: calc(var(--space-unit) * 4);
 }
 
 @media (min-width: 600px) {
