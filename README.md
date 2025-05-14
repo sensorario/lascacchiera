@@ -1,13 +1,6 @@
 # lascacchiera
 
-Si tratta di un piccolissimo tool per allenarsi a trovare le posizioni della scacchiera.
-
-## Le feature
-
-- Genera una posizione random
-- Intercetta il click sulla scacchiera
-- Se la cella corrisponde alla posizione mostra una faccina sorridente
-- Se la cella non corrisponde alla posizione mostra una faccina triste
+Si tratta di un piccolissimo tool per ripassare le posizioni delle aperture ma anche per generare immagini delle stesse.
 
 ## Installazione
 

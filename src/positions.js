@@ -19,6 +19,14 @@ const positions = [
     name: "Nimzowitsch Defense",
     fen: "r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR",
   },
+  {
+    name: "Van Geet Opening",
+    fen: "rnbqkbnr/pppppppp/8/8/8/2N5/PPPPPPPP/R1BQKBNR",
+  },
+  {
+    name: "Vienna Game",
+    fen: "rnbqkbnr/pppp1ppp/8/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR",
+  },
 ];
 
 export default positions;
