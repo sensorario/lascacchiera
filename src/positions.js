@@ -35,6 +35,10 @@ const positions = [
     name: "King's Pawn Opening: Wayward Queen, Kiddie Countergambit",
     fen: "rnbqkb1r/pppp1ppp/5n2/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR",
   },
+  {
+    name: "Petrov's Defense: Classical, Damiano Variation",
+    fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  },
 ];
 
 export default positions;
