@@ -37,7 +37,7 @@ const positions = [
   },
   {
     name: "Petrov's Defense: Classical, Damiano Variation",
-    fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+    fen: "rnbqkb1r/pppp1ppp/8/4N3/4n3/8/PPPP1PPP/RNBQKB1R",
   },
 ];
 
