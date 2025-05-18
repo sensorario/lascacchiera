@@ -1,7 +1,11 @@
+export const preset = {
+  startingPosition: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+};
+
 const positions = [
   {
     name: "Initian position",
-    fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+    fen: preset.startingPosition,
   },
   {
     name: "Giuoco Piano",
