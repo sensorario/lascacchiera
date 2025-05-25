@@ -43,6 +43,10 @@ const positions = [
     name: "Petrov's Defense: Classical, Damiano Variation",
     fen: "rnbqkb1r/pppp1ppp/8/4N3/4n3/8/PPPP1PPP/RNBQKB1R",
   },
+  {
+    name: "Caro-Kann defense",
+    fen: "rnbqkbnr/pp2pppp/2p5/3p4/4P3/2N5/PPPP1PPP/R1BQKBNR",
+  },
 ];
 
 export default positions;
